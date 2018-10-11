@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import FontAwesome from 'react-fontawesome';
 import style from './sideNav.css'
-import {Link} from 'react-router-dom';
 
+const SideNavItems = () => {
 
-const SideNavItems = (props)=> {
     const items = [
         {
             type: style.option,
@@ -36,23 +37,26 @@ const SideNavItems = (props)=> {
             text: 'Sign out',
             link: '/sign-out'
         }
-    ];
+    ]
 
-    const getItems = () => {
-        return items.map((item, index) =>
-            (<div key={index} className={style.option}>
-                <Link to={item.link}></Link>
-                <FontAwesome name={item.icon} />
-                {item.text}
-            </div>));
+    const showItems = () => {
+        return items.map( (item,i) =>{
+            return (
+                <div key={i} className={item.type}>
+                    <Link to={item.link}>
+                        <FontAwesome name={item.icon}/>
+                        {item.text}
+                    </Link>
+                </div>
+            )
+        } )
     }
 
-    return (
-        <div>
-            <div className={style.option}>
-               {getItems()}
-            </div>
-        </div>
+
+    return(
+           <div>
+               {showItems()}
+           </div> 
     )
 }
 
